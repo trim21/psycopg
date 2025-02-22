@@ -17,6 +17,7 @@ name: Build binary packages
 
 on:
   workflow_dispatch:
+  push:
   schedule:
     - cron: '28 7 * * sun'
 
@@ -35,15 +36,20 @@ env:
 jobs:
 
   linux:  # {{{
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     if: true
 
     strategy:
       fail-fast: false
       matrix:
-        arch: [x86_64, i686, ppc64le, aarch64]
+        os: [ubuntu-latest]
+        arch: [x86_64, i686, ppc64le]
         pyver: [cp39, cp310, cp311, cp312, cp313]
         platform: [manylinux, musllinux]
+
+        include:
+          - os: ubuntu-24.04-arm
+            arch: aarch64
 
     steps:
       - uses: actions/checkout@v4
