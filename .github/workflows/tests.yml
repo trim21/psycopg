@@ -82,7 +82,7 @@ jobs:
             -c max_prepared_transactions=10
 
       - name: Install the wanted libpq version
-        run: sudo ./tools/build/ci_install_libpq.sh ${{ matrix.libpq }}
+        run: sudo ./tools/ci/ci_install_libpq.sh ${{ matrix.libpq }}
 
       - name: Include psycopg-c to the packages to install
         if: ${{ matrix.impl == 'c' }}
@@ -136,7 +136,7 @@ jobs:
         run: pip install $DEPS
 
       - name: Run tests
-        run: ./tools/build/ci_test.sh
+        run: ./tools/ci/ci_test.sh
 
 
   # }}}
@@ -205,7 +205,7 @@ jobs:
         run: pip install $DEPS
 
       - name: Run tests
-        run: ./tools/build/ci_test.sh
+        run: ./tools/ci/ci_test.sh
 
 
   # }}}
@@ -264,7 +264,7 @@ jobs:
         run: pip install $DEPS
 
       - name: Run tests
-        run: ./tools/build/ci_test.sh
+        run: ./tools/ci/ci_test.sh
 
 
   # }}}
@@ -338,7 +338,7 @@ jobs:
             core.addPath(path.join(process.env.VCPKG_INSTALLATION_ROOT, 'installed/x64-windows-release/bin'));
 
       - name: Install libpq from vcpkg and install pg_config.exe stub
-        run: .\tools\build\wheel_win32_before_build.bat
+        run: .\tools\ci\wheel_win32_before_build.bat
         shell: powershell
         env:
           # cache vcpkg
@@ -358,7 +358,7 @@ jobs:
         run: pip install $DEPS
 
       - name: Run tests
-        run: ./tools/build/ci_test.sh
+        run: ./tools/ci/ci_test.sh
 
 
   # }}}
@@ -409,7 +409,7 @@ jobs:
             start-single-node --insecure
 
       - name: Install the wanted libpq version
-        run: sudo ./tools/build/ci_install_libpq.sh ${{ matrix.libpq }}
+        run: sudo ./tools/ci/ci_install_libpq.sh ${{ matrix.libpq }}
 
       - name: Include psycopg-c to the packages to install
         if: ${{ matrix.impl == 'c' }}
@@ -420,7 +420,7 @@ jobs:
         run: pip install $DEPS
 
       - name: Run tests
-        run: ./tools/build/ci_test.sh
+        run: ./tools/ci/ci_test.sh
 
 
   # }}}
