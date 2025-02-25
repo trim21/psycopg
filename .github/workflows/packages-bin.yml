@@ -48,7 +48,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: ${{ github.event_name == 'pull_request' && fromJSON('["x86_64", "aarch64"]') || fromJSON('["x86_64", "i686", "ppc64le", "aarch64"]') }}
+        arch: ${{ (github.event_name == 'pull_request' || github.event_name == 'push') && fromJSON('["x86_64", "aarch64"]') || fromJSON('["x86_64", "i686", "ppc64le", "aarch64"]') }}
         pyver: [cp39, cp310, cp311, cp312, cp313]
         platform: [manylinux, musllinux]
 
