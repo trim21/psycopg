@@ -43,7 +43,8 @@ jobs:
   linux:  # {{{
     # use ubuntu-24.04-arm when building aarch64 wheel
     runs-on: ${{ matrix.arch == 'aarch64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
-    if: true
+    # do not run cross-build when it's a pull request
+    if: ${{ github.event_name == 'pull_request' && (matrix.arch == 'i686' || matrix.arch == 'ppc64le')  }}
 
     strategy:
       fail-fast: false
