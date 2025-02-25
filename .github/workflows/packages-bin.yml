@@ -17,6 +17,9 @@ name: Build binary packages
 
 on:
   workflow_dispatch:
+  push:
+    files:
+      - '.github/workflows/packages-bin.yml'
   pull_request:
     files:
       - '.github/workflows/packages-bin.yml'
@@ -38,7 +41,8 @@ concurrency:
 jobs:
 
   linux:  # {{{
-    runs-on: ubuntu-latest
+    # use ubuntu-24.04-arm when building aarch64 wheel
+    runs-on: ${{ matrix.arch === 'aarch64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     if: true
 
     strategy:
@@ -120,7 +124,7 @@ jobs:
 
   macos:  # {{{
     runs-on: macos-latest
-    if: true
+    if: false
 
     strategy:
       fail-fast: false
@@ -173,7 +177,7 @@ jobs:
 
   windows:  # {{{
     runs-on: windows-latest
-    if: true
+    if: false
 
     strategy:
       fail-fast: false
