@@ -18,6 +18,8 @@ name: Build binary packages
 on:
   workflow_dispatch:
   pull_request:
+    files:
+      - '.github/workflows/packages-bin.yml'
   schedule:
     - cron: '28 7 * * sun'
 
@@ -27,6 +29,11 @@ env:
 
   # Latest release: https://www.openssl.org/source/
   OPENSSL_VERSION: "3.4.1"
+
+concurrency:
+  # Cancel older requests of the same workflow in the same branch.
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
 

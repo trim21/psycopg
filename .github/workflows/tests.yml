@@ -294,7 +294,7 @@ jobs:
       PSYCOPG_TEST_DSN: "host=127.0.0.1 dbname=postgres"
       # On windows pproxy doesn't seem very happy. Also a few timing test fail.
       NOT_MARKERS: "timing proxy mypy"
-      PG_VERSION: "17.2"
+      PG_VERSION: "17.4"
 
     defaults:
       run:
